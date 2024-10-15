@@ -1,5 +1,4 @@
-const { json } = require('stream/consumers');
-let cmd = require('./C-1-cmd.js');
+let cmd = require('./C-2-cmd.js');
 let fs = require('fs');
 
 cmd.use("minus", function(contInputs){
@@ -35,13 +34,13 @@ cmd.use("saveRecord", function(contInputs){
         email : contInputs[4]
     }
 
-    let formattedData = JSON.stringify(dbWrite)
+    let formattedData = `{name: ${dbWrite.name}, family: ${dbWrite.family}, age: ${dbWrite.age}, email: ${dbWrite.email}}`;
 
     fs.writeFile('myDatabase.txt', formattedData, {encoding:'utf8'}, function(error){
-        if (error){
+        if(error){
             console.log('ERROR:', error);
         }
-        else {
+        else{
             console.log('File Saved.')
         }
     })
